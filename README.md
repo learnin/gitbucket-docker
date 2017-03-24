@@ -11,7 +11,8 @@ export HTTPS_PROXY=$https_proxy
 export no_proxy=`docker-machine ip default`
 export NO_PROXY=$no_proxy
 
-./build_and_run_for_64bit_os.sh
+docker-compose build
+docker-compose up -d
 ```
 ### not using Docker Compose(e.g. Windows 32bit)
 ```shell
