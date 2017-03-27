@@ -15,6 +15,7 @@ docker container run \
   --name gitbucketdocker_db_1 \
   -p 50103:3306 \
   --restart always \
+  -v /etc/localtime:/etc/localtime:ro \
   -v gitbucketdocker_db-data:/var/lib/mysql \
   gitbucketdocker_db
 
@@ -36,5 +37,6 @@ docker container run \
   -p 50003:80 \
   -p 29418:29418 \
   --restart always \
+  -v /etc/localtime:/etc/localtime:ro \
   -v gitbucketdocker_app-data:/gitbucket \
   gitbucketdocker_app

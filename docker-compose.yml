@@ -13,6 +13,7 @@ services:
       - "50103:3306"
     restart: always
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - db-data:/var/lib/mysql
   app:
     build:
@@ -35,6 +36,7 @@ services:
       - "29418:29418"
     restart: always
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - app-data:/gitbucket
 volumes:
   db-data: {}
