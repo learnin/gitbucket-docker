@@ -28,8 +28,8 @@ services:
       - GITBUCKET_DB_NAME=gitbucket
       - GITBUCKET_DB_USER=gitbucket
       - GITBUCKET_DB_PASSWORD=gitbucket
-      - JAVA_OPTS="-server"
-      - GITBUCKET_OPTS="--port=80"
+      - JAVA_OPTS=-server
+      - GITBUCKET_OPTS=--port=80
       - TZ=Asia/Tokyo
     ports:
       - "50003:80"
