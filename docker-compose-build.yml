@@ -1,6 +1,7 @@
 version: '3'
 services:
   db:
+    build: db
     environment:
       - DATADIR=/var/lib/mysql
       - MYSQL_ROOT_PASSWORD=gitbucket
@@ -8,7 +9,6 @@ services:
       - MYSQL_USER=gitbucket
       - MYSQL_PASSWORD=gitbucket
       - TZ=Asia/Tokyo
-    image: learnin/gitbucket-db
     ports:
       - "50103:3306"
     restart: unless-stopped
@@ -16,6 +16,11 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - db-data:/var/lib/mysql
   app:
+    build:
+      args:
+        - http_proxy=${http_proxy}
+        - https_proxy=${https_proxy}
+      context: app
     depends_on:
       - db
     environment:
@@ -26,7 +31,6 @@ services:
       - JAVA_OPTS=-server
       - GITBUCKET_OPTS=--port=80
       - TZ=Asia/Tokyo
-    image: learnin/gitbucket-app
     ports:
       - "50003:80"
       - "29418:29418"

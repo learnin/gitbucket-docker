@@ -17,7 +17,7 @@ docker container run \
   --restart unless-stopped \
   -v /etc/localtime:/etc/localtime:ro \
   -v gitbucketdocker_db-data:/var/lib/mysql \
-  gitbucketdocker_db
+  learnin/gitbucket-db
 
 # app-data volume
 docker volume create --name gitbucketdocker_app-data
@@ -39,4 +39,4 @@ docker container run \
   --restart unless-stopped \
   -v /etc/localtime:/etc/localtime:ro \
   -v gitbucketdocker_app-data:/gitbucket \
-  gitbucketdocker_app
+  learnin/gitbucket-app
