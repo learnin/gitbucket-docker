@@ -28,6 +28,38 @@ sh /tmp/gitbucket_run_for_32bit_os.sh
 rm -f /tmp/gitbucket_run_for_32bit_os.sh
 ```
 
+## How to backup
+```shell
+docker container run \
+  --rm \
+  -v gitbucketdocker_db-data:/target/db-data \
+  -v gitbucketdocker_app-data:/target/app-data \
+  -v $(pwd):/backup \
+  ubuntu tar cvzfp /backup/gitbucket_backup.tar.gz /target
+```
+
+If you use docker-machine, execute the above command in docker-machine, and copy backup.tar.gz from docker-machine to host machine with the following command.
+
+```shell
+docker-machine scp default:~/gitbucket_backup.tar.gz .
+```
+
+## How to restore
+```shell
+docker container run \
+  --rm \
+  -v gitbucketdocker_db-data:/target/db-data \
+  -v gitbucketdocker_app-data:/target/app-data \
+  -v $(pwd):/backup \
+  ubuntu bash -c "cd /target && tar xvzfp /backup/gitbucket_backup.tar.gz --strip 1"
+```
+
+If you use docker-machine, execute the following command to copy backup.tar.gz from host machine to docker-machine, and execute the above command in docker-machine.
+
+```shell
+docker-machine scp gitbucket_backup.tar.gz default:~/
+```
+
 # For developers
 
 ## How to build and run
